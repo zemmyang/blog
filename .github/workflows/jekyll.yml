@@ -114,6 +114,6 @@ jobs:
     needs: newcheck
     steps:
       - run: |
-        echo ${{needs.newcheck.outputs.title}} 
-        echo ${{needs.newcheck.outputs.new-file}}
-        echo ${{needs.newcheck.outputs.url}}
+          echo ${{needs.newcheck.outputs.title}} 
+          echo ${{needs.newcheck.outputs.new-file}}
+          echo ${{needs.newcheck.outputs.url}}
