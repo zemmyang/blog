@@ -129,7 +129,7 @@ jobs:
         uses: dart-actions/tweet@v1.0.0
         with:
           bearer-token: ${{ secrets.TWITTER_VDNR_BEARER_TOKEN }}
-          status: |
+          text: |
             test post please ignore ${{ needs.newcheck.outputs.title }}
 
       - name: Toot
