@@ -126,15 +126,11 @@ jobs:
           echo "${{ needs.deploy.outputs.url }}"
 
       - name: Tweet
-        uses: snow-actions/tweet@v1.3.0
+        uses: dart-actions/tweet@v1.0.0
         with:
+          bearer-token: ${{ secrets.TWITTER_VDNR_BEARER_TOKEN }}
           status: |
             test post please ignore ${{ needs.newcheck.outputs.title }}
-        env:
-          CONSUMER_API_KEY: ${{ secrets.TWITTER_KEY }}
-          CONSUMER_API_SECRET_KEY: ${{ secrets.TWITTER_SECRET }}
-          ACCESS_TOKEN: ${{ secrets.TWITTER_VDNR_TOKEN }}
-          ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_VDNR_SECRET }}
 
       - name: Toot
         id: mastodon
