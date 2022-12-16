@@ -85,14 +85,17 @@ jobs:
           echo "${{ steps.changed-files-specific.outputs.added_files }}"
 
       - name: Get new post metadata
-        uses: mheap/markdown-meta-action@v1
+        uses: zemmyang/markdown-meta-action@v1
         id: meta
         with:
           file: "${{ steps.changed-files-specific.outputs.added_files }}"
 
       - name: Store title
         id: store-title
-        run: echo "data=${{ steps.meta.output.title }}" >> $GITHUB_OUTPUT
+        run: |
+          echo "${{ steps.meta.output.title }}"
+          echo "${{ steps.meta.outputs.title }}"
+          echo "data=${{ steps.meta.output.title }}" >> $GITHUB_OUTPUT
 
       - name: Store tags
         id: store-tags
@@ -114,6 +117,6 @@ jobs:
     needs: newcheck
     steps:
       - run: |
-          echo ${{needs.newcheck.outputs.title}} 
-          echo ${{needs.newcheck.outputs.new-file}}
-          echo ${{needs.newcheck.outputs.url}}
+          echo "${{ needs.newcheck.outputs.title }}" 
+          echo "${{ needs.newcheck.outputs.new-file }}"
+          echo "${{ needs.newcheck.outputs.url }}"
