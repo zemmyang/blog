@@ -1,0 +1,33 @@
+title: Test
+author: Zem
+email: vardonir@gmail.com
+description: > 
+  Test page. I'm working on it
+
+# social links
+twitter_username: vardonir
+github_username:  zemmyang
+rss: rss
+linkedin_username: zemmyang
+youtube_username: vardonir
+
+# Mastodon instances
+mastodon:
+- username: vardonir
+  instance: mstdn.social
+
+
+show_excerpts: false
+
+minima:
+  date_format: "%b %-d, %Y"
+
+header_pages:
+- about.html
+
+# Build settings
+theme: minima
+
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag
