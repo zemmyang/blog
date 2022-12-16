@@ -3,6 +3,7 @@ author: Zem
 email: vardonir@gmail.com
 description: > 
   Test page. I'm working on it
+permalink: /:title
 
 # social links
 twitter_username: vardonir
@@ -28,6 +29,5 @@ header_pages:
 # Build settings
 theme: minima
 
-plugins:
- - jekyll-feed
- - jekyll-seo-tag
+plugins: [jekyll-paginate, jekyll-sitemap, jekyll-feed, jekyll-seo-tag]
+paginate: 5

@@ -55,10 +55,10 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v1
 
-  # Look for new posts
+  # Post-processing (heh)
   newcheck:
     runs-on: ubuntu-latest
-    name: Get new post
+    name: Post-processing
     needs: deploy
     steps:
       - uses: actions/checkout@v3
@@ -72,8 +72,30 @@ jobs:
           files: |
             _posts/**
 
-      - name: If any change
+      - name: Echo if any new files added
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
-          echo "Found changes:"
-          echo "${{ steps.changed-files-specific.outputs.all_changed_files }}"
+          echo "Found new file:"
+          echo "${{ steps.changed-files-specific.outputs.added_files }}"
+
+      - name: Get new post metadata
+        uses: mheap/markdown-meta-action@v1
+        id: meta
+        with:
+          file: "${{ steps.changed-files-specific.outputs.added_files }}"
+
+      - name: Echo values #testing
+        run: |
+          echo "${{ steps.meta.output.title }}"
+          echo "${{ steps.meta.output.tags }}"
+
+      - name: Test SED
+        run: |
+          echo "Found new file:"
+          NEW_FILE_TITLE = $("${{ steps.changed-files-specific.outputs.added_files }}" | sed -r "_posts\\\d+-\d+-\d+-" | sed -r ".md")
+          echo "$NEW_FILE_TITLE"
+          echo "::set-env name=TEMP::$NEW_FILE_TITLE"
+
+      - name: Test ENV
+        run: |
+          echo $NEW_FILE_TITLE
