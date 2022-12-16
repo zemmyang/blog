@@ -110,8 +110,8 @@ jobs:
         run: |
           echo "Found new file:"
           data="${{ steps.changed-files-specific.outputs.added_files }}"
-          data2=`echo $data | awk '{ print substr ($0, 17 ) }' | awk '{ print substr( $0, 1, length($0)-3 ) }'` >> $GITHUB_OUTPUT
-          echo "data2" >> $GITHUB_OUTPUT
+          data2=`echo $data | awk '{ print substr ($0, 17 ) }' | awk '{ print substr( $0, 1, length($0)-3 ) }'`
+          echo "$data2" >> $GITHUB_OUTPUT
 
   xpost:
     runs-on: ubuntu-latest
