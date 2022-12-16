@@ -63,7 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 2
 
       - name: Get changed files in _posts dir
         id: changed-files-specific
@@ -72,8 +72,8 @@ jobs:
           files: |
             _posts/**
 
-      - name: List all
+      - name: If any change
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
-          for file in ${{ steps.changed-files.outputs.added_files }}; do
-            echo "$file was added"
-          done
+          echo "Found changes:"
+          echo "${{ steps.changed-files-specific.outputs.all_changed_files }}"
