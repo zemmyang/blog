@@ -65,7 +65,7 @@ jobs:
       tags: ${{ steps.store-tags.outputs.data }}
       summary: ${{ steps.store-summary.outputs.data }}
       url: ${{ steps.store-url.outputs.data }}
-      new-file: ${{ steps.store-new-file.outputs.data2 }}
+      new-file: ${{ steps.store-new-file.outputs.data3 }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -111,7 +111,7 @@ jobs:
           echo "Found new file:"
           data="${{ steps.changed-files-specific.outputs.added_files }}"
           data2=`echo $data | awk '{ print substr ($0, 19 ) }' | awk '{ print substr( $0, 1, length($0)-3 ) }'`
-          echo "$data2" >> $GITHUB_OUTPUT
+          echo "data3=$data2" >> $GITHUB_OUTPUT
 
   xpost:
     runs-on: ubuntu-latest
