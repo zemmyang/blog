@@ -85,7 +85,7 @@ jobs:
           echo "${{ steps.changed-files-specific.outputs.added_files }}"
 
       - name: Get new post metadata
-        uses: zemmyang/markdown-meta-action@v1
+        uses: mheap/markdown-meta-action@v1.0.1
         id: meta
         with:
           file: "${{ steps.changed-files-specific.outputs.added_files }}"
@@ -95,15 +95,15 @@ jobs:
         run: |
           echo "${{ steps.meta.output.title }}"
           echo "${{ steps.meta.outputs.title }}"
-          echo "data=${{ steps.meta.output.title }}" >> $GITHUB_OUTPUT
+          echo "data=${{ steps.meta.outputs.title }}" >> $GITHUB_OUTPUT
 
       - name: Store tags
         id: store-tags
-        run: echo "data=${{ steps.meta.output.tags }}" >> $GITHUB_OUTPUT
+        run: echo "data=${{ steps.meta.outputs.tags }}" >> $GITHUB_OUTPUT
 
       - name: Store summary
         id: store-summary
-        run: echo "data=${{ steps.meta.output.summary }}" >> $GITHUB_OUTPUT
+        run: echo "data=${{ steps.meta.outputs.summary }}" >> $GITHUB_OUTPUT
 
       - name: Test SED
         id: store-new-file
@@ -111,6 +111,7 @@ jobs:
           echo "Found new file:"
           data="${{ steps.changed-files-specific.outputs.added_files }}"
           data2=`echo $data | awk '{ print substr ($0, 17 ) }' | awk '{ print substr( $0, 1, length($0)-3 ) }'` >> $GITHUB_OUTPUT
+          echo "data2" >> $GITHUB_OUTPUT
 
   xpost:
     runs-on: ubuntu-latest
