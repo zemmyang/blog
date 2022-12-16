@@ -128,6 +128,10 @@ jobs:
       - name: Tweet
         uses: dart-actions/tweet@v1.0.0
         with:
+          consumer-key: ${{ secrets.TWITTER_KEY }}
+          consumer-secret: ${{ secrets.TWITTER_SECRET }}
+          access-token: ${{ secrets.TWITTER_VDNR_TOKEN }}
+          access-token-secret: ${{ secrets.TWITTER_VDNR_SECRET }}
           bearer-token: ${{ secrets.TWITTER_VDNR_BEARER_TOKEN }}
           text: |
             test post please ignore ${{ needs.newcheck.outputs.title }}
