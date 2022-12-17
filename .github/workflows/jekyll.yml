@@ -126,7 +126,6 @@ jobs:
           echo "${{ needs.deploy.outputs.url }}"
 
       - name: Tweet
-        uses: actions/checkout@v2
         run: |
           curl -X POST -H "Authorization: Bearer ${{ secrets.TWITTER_VDNR_BEARER_TOKEN }} " -H "Content-Type: application/json" -d '{"status": "test post please ignore ${{ needs.newcheck.outputs.title }}"}' "https://api.twitter.com/2/tweets"
 
